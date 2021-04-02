@@ -1,18 +1,47 @@
 {% load static %}
-{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Manager</title>
     <link rel="stylesheet" href="{% static 'css/Login/login.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 </head>
+
 <body>
     <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-<body>
-    <a href="{% provider_login_url 'google' %}"><button> Sign in with Google</button></a>    
+
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <div class="row center">
+                    <!-- <div class="col-xs-4 ">
+                        <div class="image-container">
+                            <img src="{% static 'images/logo.png' %}" alt="">
+                        </div>
+                    </div> -->
+                    <div class="col-xs-12">
+                        <div class="flip-box">
+                            <div class="flip-box-inner">
+                                <img src="{% static 'images/logo.png' %}" alt="logo" class="image">
+                                <div class="flip-box-front">
+                                    <h4 style="margin-top: 3rem;">Welcome</h4>
+                                    <h3>Login To your account</h3>
+                                    <a href=""><button class="btn btn-primary" style="margin-top: 5rem;"> Sign in with
+                                            Google</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
 </body>
-</body>
+
 </html>
