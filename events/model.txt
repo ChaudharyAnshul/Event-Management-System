@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User as authUser
 
 # Create your models here.
-class Department(models.Model):
+class Department(models.model):
     name = models.CharField(max_length=100)
 
 def student_photo_upload(instance, filename):
     return "Photos/Students/{}".format(filename)
 
-class Student(models.Model):
+class Student(models.model):
     user = models.ForeignKey(authUser, on_delete= models.CASCADE)
     iid = models.IntegerField()
     dept = models.ForeignKey(Department, on_delete= models.CASCADE)
@@ -21,7 +21,7 @@ class Student(models.Model):
 def staff_photo_upload(instance, filename):
     return "Photos/Staff/{}".format(filename)
 
-class Staff(models.Model):
+class Staff(models.model):
     user = models.ForeignKey(authUser, on_delete= models.CASCADE)
     eid = models.IntegerField()
     dept = models.ForeignKey(Department, on_delete= models.CASCADE)
@@ -32,23 +32,23 @@ class Staff(models.Model):
     is_hod = models.BooleanField(default=False)
     photo = models.FileField(upload_to=staff_photo_upload)
 
-class Council(models.Model):
+class Council(models.model):
     name = models.CharField(max_length=100)
-    dept = models.ForeignKey(Department, default=None, on_delete=models.CASCADE)
+    dept = models.ForeignKey(Department, default=None)
     is_institute = models.BooleanField(default=False)
     is_department = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     # faculty and student head table 
 
-class FacultyHead(models.Model):
+class FacultyHead(models.model):
     council = models.ForeignKey(Council, on_delete= models.CASCADE)
     staff = models.ForeignKey(Staff, on_delete= models.CASCADE)
 
-class StudentHead(models.Model):
+class StudentHead(models.model):
     council = models.ForeignKey(Council, on_delete= models.CASCADE)
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
 
-class CouncilMember(models.Model):
+class CouncilMember(models.model):
     council = models.ForeignKey(Council, on_delete= models.CASCADE)
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
     can_edit = models.BooleanField(default=False)
@@ -56,7 +56,7 @@ class CouncilMember(models.Model):
 def poster_upload(instance, filename):
     return "Events/Posters/{}".format(filename)
 
-class Event(models.Model):
+class Event(models.model):
     name = models.CharField(max_length=100)
     council = models.ForeignKey(Council, on_delete= models.CASCADE)
     is_approved = models.BooleanField(default=False)
@@ -68,11 +68,11 @@ class Event(models.Model):
     payment_no = models.IntegerField()
     is_active = models.BooleanField(default=False)
 
-class EventRegistration(models.Model):
+class EventRegistration(models.model):
     event = models.ForeignKey(Event, on_delete= models.CASCADE)
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
 
-class EventWinner(models.Model):
+class EventWinner(models.model):
     event = models.ForeignKey(Event, on_delete= models.CASCADE)
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
     place = models.IntegerField()
