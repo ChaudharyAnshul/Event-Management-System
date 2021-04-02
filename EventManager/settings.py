@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'EventManager.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'VesitHacks',
+        'USER': 'hacker',
+        'PASSWORD': 'Nashe@123',
+        'HOST': 'vesithacks.database.windows.net',
+        'PORT': '1433',
     }
 }
 
