@@ -18,7 +18,7 @@ urlpatterns = [
     path('allowGS', views.allow_requests_gs),
     path('allowCouncilMember', views.allow_requests_council_member),
     path('allowStudentHead', views.allow_requests_student_head),
-    path('approveRequests', views.approve_requests)
+    path('approveRequests', views.approve_requests),
     path('manageEvents/<council>', views.manageEventsCouncil, name='manageEventsCouncil'),
     path('logout', views.logout, name='logout'),
     path('addEvent', views.add_event, name='addEvent'),
