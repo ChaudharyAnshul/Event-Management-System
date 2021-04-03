@@ -278,7 +278,19 @@ def approve_requests(request):
                     staff = faculty
                 )
                 facultyIncharge.save()
-            elif role.role.role == 'GS':
+        
+            return redirect('/approveRequest')
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def studentApprove_requests(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            role = RoleRequests.objects.get(id = request.POST['requestId'])
+            RoleRequests.objects.filter(id = request.POST['requestId']).update(is_approved=True)
+            if role.role.role == 'GS':
                 Student.objects.filter(user= role.user.id).update(is_gs= True)
             elif role.role.role == 'Council Member':
                 student = Student.objects.get(user = role.user.id)
@@ -300,7 +312,8 @@ def approve_requests(request):
                     can_edit= True
                 )
                 council_member.save()
-            return redirect('/approveRequest')
+
+            return redirect('/studentApproveRequest')
         else:
             messages.info(request, 'Wrong Request Method')
     else:
@@ -312,6 +325,13 @@ def reject_requests(request):
         role = RoleRequests.objects.get(id = request.POST['requestId'])
         RoleRequests.objects.filter(id = request.POST['requestId']).update(is_approved=False)
     return redirect('/approveRequest')
+
+def studentReject_requests(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            role = RoleRequests.objects.get(id = request.POST['requestId'])
+            RoleRequests.objects.filter(id = request.POST['requestId']).update(is_approved=False)
+        return redirect('/studentApproveRequest')
 
 @login_required(login_url = '/')
 def viewEvents(request, council,eventId):
@@ -398,18 +418,19 @@ def studentApproveRequest(request):
             council = StudentHead.objects.get(student = student)  
             pending_requests = []
             for i in requests:
-                
-                if i.user.is_staff == False and i.belongsTo.name == council.council.name and i.role.role == 'Council Member':
-                    pending_requests.append(i)
+                if i.user.is_staff == False and i.role.role == 'Council Member':
+                    if i.belongsTo.name == council.council.name:
+                        pending_requests.append(i)
             user_data.update({'pending_requests':pending_requests})
             return render(request, 'Dashboard/studentApproveRequest.html', user_data)
-        elif Staff.objects.get(user = request.user.id).exists():
+        elif Staff.objects.filter(user = request.user.id).exists():
             staff = Staff.objects.get(user = request.user.id)
             council = FacultyHead.objects.get(staff = staff)  
             pending_requests = []
             for i in requests:
-                if i.user.is_staff == False and i.belongsTo.name == council.council.name and i.role.role == 'Student Head':
-                    pending_requests.append(i)
+                if i.user.is_staff == False and i.role.role == 'Student Head':
+                    if i.belongsTo.name == council.council.name:
+                        pending_requests.append(i)
             user_data.update({'pending_requests':pending_requests})
             return render(request, 'Dashboard/studentApproveRequest.html', user_data)
 

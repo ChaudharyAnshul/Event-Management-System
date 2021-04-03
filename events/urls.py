@@ -27,6 +27,7 @@ urlpatterns = [
     path('adminDashboard', views.adminDashboard, name='adminDashboard'),
     path('roleRequest', views.roleRequest, name='roleRequest'),
     path('approveRequest', views.approveRequest, name='approveRequest'),
+    path('student_approved_requests', views.studentApprove_requests, name='studentApprove_requests'),
     path('manageEvents/<council>/viewEvents/<eventId>', views.viewEvents, name='viewEvents'),
     path('manageEvents/<council>/viewEvents/<eventId>/edit', views.editEvents, name='editEvents'),
     path('allevents/<eventId>/eventRegistration', views.event_registration, name='eventRegistration'),
@@ -41,4 +42,5 @@ urlpatterns = [
     path('yourCouncil', views.yourCouncil, name='yourCouncil'),
     path('yourCouncilDetails/<council>', views.yourCouncilDetails, name='yourCouncilDetails'),
     path('addRequest/', views.add_request),
+    path('studentReject_requests/', views.studentReject_requests, name='studentReject_requests')
 ]
