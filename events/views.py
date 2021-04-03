@@ -334,6 +334,9 @@ def add_request(request):
     else:
         return redirect('/accounts/google/login')
 
+def sendRequest(request):
+    return render(request, 'Dashboard/sendRequest.html')
+
 def yourCouncil(request):
     user_data = get_user_data(request)
     return render(request, 'Dashboard/yourCouncil.html', user_data)
