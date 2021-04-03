@@ -38,6 +38,9 @@ def registrationStaff(request):
                 photo = request.FILES['photo']  
             )
             staff.save()
+            user = authUser.objects.get(id = request.user.id)
+            user.is_staff = True
+            user.save()
             return redirect('/dashboard')
         else:
             messages.info(request, 'Incorrect Employee ID')
