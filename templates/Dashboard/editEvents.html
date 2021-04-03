@@ -20,27 +20,27 @@
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
-            <form class="form-horizontal form-material" method="POST" action="" enctype="multipart/form-data">
+            <form class="form-horizontal form-material" method="POST" action="{% url 'editEvents' event.council.name event.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group mb-4">
                     <label class="col-md-12 p-0">Name of the Event <span style="color: red;">*</span></label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="text" placeholder="Praxis" class="form-control p-0 border-0" name="name"
-                            id="view_name" required readonly>
+                            id="view_name" value="{{event.name}}" required readonly>
                     </div>
                 </div>
                 <div class="form-group mb-4">
                     <label class="col-md-12 p-0">Council Name <span style="color: red;">*</span></label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="text" placeholder="ISTE" class="form-control p-0 border-0" name="council"
-                            id="council" value='{{sel_council}}' required readonly>
+                            id="council" value="{{event.council.name}} "required readonly>
                     </div>
                 </div>
                 <div class="form-group mb-4">
                     <label for="date" class="col-md-12 p-0">Date <span style="color: red;">*</span></label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="datetime-local" class="form-control p-0 border-0" name="date" id="view_date"
-                            required readonly>
+                            value={{event.date}} required readonly>
                     </div>
                 </div>
                 <div class="form-group mb-4">
@@ -48,13 +48,13 @@
                             style="color: red;">*</span></label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="text" class="form-control p-0 border-0" name="description" id="view_description"
-                            placeholder="Event Description" required readonly>
+                            placeholder="Event Description" value="{{event.description}}" required readonly>
                     </div>
                 </div>
                 <div class="form-group mb-4">
                     <label for="poster" class="col-md-12 p-0">Poster <span style="color: red;">*</span></label>
                     <div class="col-md-12 border-bottom p-0">
-                        <input type="file" class="form-control p-0 border-0" name="poster" id="view_poster" required
+                        <input type="file" class="form-control p-0 border-0" name="poster" id="view_poster"
                             disabled>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <label for="registration_fee" class="col-md-12 p-0">Registration Fee</label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="number" class="form-control p-0 border-0" name="registration_fee" placeholder="30"
-                            value='0' id="view_registration_fee" readonly>
+                            id="view_registration_fee" value="{{event.registration_fee}}" readonly>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <label for="payment_no" class="col-md-12 p-0">Payment Number</label>
                     <div class="col-md-12 border-bottom p-0">
                         <input type="tel" class="form-control p-0 border-0" name="payment_no" placeholder="123456790"
-                            value='0' id="view_payment_no" readonly>
+                            value='{{event.payment_no}}' id="view_payment_no" readonly>
                     </div>
                 </div>
                 <div class="modal-footer">

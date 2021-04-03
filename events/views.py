@@ -105,12 +105,14 @@ def registrationStudent(request):
         else:
             messages.info(request, 'Incorrect Institute ID')
             return redirect('/registration')
-    
+
+@login_required(login_url = '/' )   
 def manageEvents(request):
     if request.method == 'GET':
         user_data = get_user_data(request)
         return render(request, 'Dashboard/manageEvents.html', user_data)
 
+@login_required(login_url = '/')
 def manageEventsCouncil(request, council):
     if request.method == 'GET':
         user_data = get_user_data(request)
@@ -156,5 +158,25 @@ def event_registration(request):
     else:
         return redirect('/accounts/google/login')
 
-def editEvents(request):
-    return render(request, 'Dashboard/editEvents.html')
+@login_required(login_url = '/')
+def viewEvents(request, council,eventId):
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        event = Event.objects.get(id = eventId)
+        user_data.update({'event':event})
+        return render(request, 'Dashboard/editEvents.html', user_data)
+    
+@login_required(login_url = '/')
+def editEvents(request, council, eventId):
+    if request.method == 'POST':
+        user_data = get_user_data(request)
+        coun = Council.objects.get(name = council)
+        Event.objects.filter(id = eventId).update(
+            name = request.POST['name'],
+            council = coun,
+            date = request.POST['date'],
+            description = request.POST['description'],
+            registration_fee = request.POST['registration_fee'],
+            payment_no = request.POST['payment_no'],
+        )
+        return redirect('/manageEvents')
