@@ -336,3 +336,19 @@ def add_request(request):
 
 def sendRequest(request):
     return render(request, 'Dashboard/sendRequest.html')
+
+def yourCouncil(request):
+    user_data = get_user_data(request)
+    return render(request, 'Dashboard/yourCouncil.html', user_data)
+
+def yourCouncilDetails(request, council):
+    user_data = get_user_data(request)
+    councilObj = Council.objects.get(name= council)
+    print(councilObj)
+    events = Event.objects.filter(council= councilObj)
+    user_data.update({'events': events})
+    print(events)
+    council_members = CouncilMember.objects.filter(council=councilObj)
+    user_data.update({'councilMembers': council_members})
+    print(council_members.values_list)
+    return render(request, 'Dashboard/yourCouncilDetails.html', user_data)
