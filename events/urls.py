@@ -14,4 +14,7 @@ urlpatterns = [
     path('logout', views.logout, name='logout'),
     path('addEvent', views.add_event, name='addEvent'),
     path('eventRegistration', views.event_registration, name='eventRegistration'),
+    path('allEvents', views.allEvents, name='allEvents'),
+    path('myEvents', views.myEvents, name='myEvents'),
+    path('event', views.event, name='event'),
 ]
