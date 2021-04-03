@@ -191,6 +191,8 @@
                                 <span class="hide-menu">Admin Dashboard</span>
                             </a>
                         </li>
+                        {% endif %}
+                        {% if is_fac or is_head or role.is_principal %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manageRole' %}"
                             aria-expanded="false" style="text-decoration: none;">

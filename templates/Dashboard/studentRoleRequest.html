@@ -6,11 +6,14 @@
 {% endblock %}
 
 {% block content %}
+
+{% if role.is_principal %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
             <h3 class="box-title">Role Request Form</h3>
-            <form class="form-horizontal form-material">
+            <form class="form-horizontal form-material" method="POST" action="allowGS" >
+                {% csrf_token %}
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
@@ -26,8 +29,9 @@
                                 <td>1</td>
                                 <td>General Secretary</td>
                                 <td>
-                                    <input type="text" name="gs" value="GS" disabled style="display: none;">
+                                    <input type="text" name="gs" value="GS" style="display: none;">
                                     <div class="switch">
+                                        {% if g_role.accept_requests %}
                                         <input type="radio" class="switch-input" name="accept_requests" value="True"
                                             id="gs1" checked>
                                         <label for="gs1" class="switch-label switch-label-off">ON</label>
@@ -35,10 +39,18 @@
                                             id="gs2">
                                         <label for="gs2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
+                                        {% else %}
+                                        <input type="radio" class="switch-input" name="accept_requests" value="True"
+                                            id="gs1">
+                                        <label for="gs1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests" value="False"
+                                            id="gs2" checked>
+                                        <label for="gs2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
-                           
 
                         </tbody>
                     </table>
@@ -50,12 +62,70 @@
         </div>
     </div>
 </div>
+{% endif %}
 
+{% if is_fac %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
             <h3 class="box-title">Role Request Form</h3>
-            <form class="form-horizontal form-material">
+            <form class="form-horizontal form-material" action="allowStudentHead" method="POST">
+                {% csrf_token %}
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Role</th>
+                                <th class="border-top-0" style="text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Student Heads</td>
+                                <td>
+                                    <input type="text" name="student_head" value="Student Head" style="display: none;">
+                                    <div class="switch">
+                                        {% if s_role.accept_requests %}
+                                        <input type="radio" class="switch-input" name="accept_requests" value="True"
+                                            id="student_head1" checked>
+                                        <label for="student_head1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests" value="False"
+                                            id="student_head2">
+                                        <label for="student_head2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% else %}
+                                        <input type="radio" class="switch-input" name="accept_requests" value="True"
+                                        id="student_head1">
+                                        <label for="student_head1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests" value="False"
+                                            id="student_head2" checked>
+                                        <label for="student_head2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-wrapper " style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="width: 20%;">Submit</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if is_fac or is_head %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Role Request Form</h3>
+            <form class="form-horizontal form-material" action="allowCouncilMember" method="POST">
+                {% csrf_token %}
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
@@ -71,8 +141,9 @@
                                 <td>1</td>
                                 <td>Council Members</td>
                                 <td>
-                                    <input type="text" name="council_member" value="Council Member" disabled style="display: none;">
+                                    <input type="text" name="council_member" value="Council Member" style="display: none;">
                                     <div class="switch">
+                                        {% if c_role.accept_requests %}
                                         <input type="radio" class="switch-input" name="accept_requests" value="True"
                                             id="council_member1" checked>
                                         <label for="council_member1" class="switch-label switch-label-off">ON</label>
@@ -80,56 +151,18 @@
                                             id="council_member2">
                                         <label for="council_member2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                           
-
-                        </tbody>
-                    </table>
-                </div>
-                <div class="btn-wrapper " style="text-align: center;">
-                    <button type="submit" class="btn btn-primary" style="width: 20%;">Submit</button>
-                </div>    
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-        <div class="white-box">
-            <h3 class="box-title">Role Request Form</h3>
-            <form class="form-horizontal form-material">
-                <div class="table-responsive">
-                    <table class="table text-nowrap">
-                        <thead>
-                            <tr>
-                                <th class="border-top-0">#</th>
-                                <th class="border-top-0">Role</th>
-                                <th class="border-top-0" style="text-align: center;">Action</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Student Heads</td>
-                                <td>
-                                    <input type="text" name="student_head" value="Student Head" disabled style="display: none;">
-                                    <div class="switch">
+                                        {% else %}
                                         <input type="radio" class="switch-input" name="accept_requests" value="True"
-                                            id="student_head1" checked>
-                                        <label for="student_head1" class="switch-label switch-label-off">ON</label>
+                                        id="council_member1">
+                                        <label for="council_member1" class="switch-label switch-label-off">ON</label>
                                         <input type="radio" class="switch-input" name="accept_requests" value="False"
-                                            id="student_head2">
-                                        <label for="student_head2" class="switch-label switch-label-on">OFF</label>
+                                            id="council_member2" checked>
+                                        <label for="council_member2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
-                           
-
                         </tbody>
                     </table>
                 </div>
@@ -140,4 +173,6 @@
         </div>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}
