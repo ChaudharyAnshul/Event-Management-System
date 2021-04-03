@@ -34,5 +34,5 @@ urlpatterns = [
     path('myEvents/<eventId>', views.myEventsDetail, name='myEventsDetail'),
     path('allevents/<eventId>', views.event, name='event'),
     path('yourCouncil', views.yourCouncil, name='yourCouncil'),
-    path('yourCouncilDetails', views.yourCouncilDetails, name='yourCouncilDetails'),
+    path('yourCouncilDetails/<council>', views.yourCouncilDetails, name='yourCouncilDetails'),
 ]

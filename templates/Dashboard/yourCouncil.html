@@ -10,30 +10,15 @@
 <!-- Three charts -->
 <!-- ============================================================== -->
 <div class="row justify-content-center">
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
-            <div class="white-box analytics-info" style="border-radius: 7px;">
-                <h3 class="box-title center">Council 1</h3>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council 2</h3>
+    {% for council in councils %}
+        <div class="col-lg-4 col-md-12">
+            <a href="{% url 'yourCouncilDetails' council.council %}" class="a-tag">
+                <div class="white-box analytics-info" style="border-radius: 7px;">
+                    <h3 class="box-title center">{{ council.council }}</h3>
+                </div>
+            </a>
         </div>
-        </a>
-    </div>
-
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council 3</h3>
-        </div>
-    </a>
-    </div>
-    
+    {% endfor %}
 </div>
 
 
