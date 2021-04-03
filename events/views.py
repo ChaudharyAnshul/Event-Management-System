@@ -333,3 +333,6 @@ def add_request(request):
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
+
+def sendRequest(request):
+    return render(request, 'Dashboard/sendRequest.html')

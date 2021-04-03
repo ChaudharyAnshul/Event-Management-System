@@ -33,4 +33,5 @@ urlpatterns = [
     path('myEvents', views.myEvents, name='myEvents'),
     path('myEvents/<eventId>', views.myEventsDetail, name='myEventsDetail'),
     path('allevents/<eventId>', views.event, name='event'),
+    path('sendRequest', views.sendRequest, name='sendRequest'),
 ]
