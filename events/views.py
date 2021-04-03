@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User as authUser
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout as django_logout
 from .models import *
 from django.contrib import messages
 # Create your views here.
@@ -12,7 +12,7 @@ def login(request):
 
 @login_required(login_url = '/')
 def logout(request):
-    logout(request)
+    django_logout(request)
     return redirect('/')
 
 def get_user_data(request):
@@ -144,6 +144,87 @@ def event_registration(request):
             register.save()
             return redirect('/dashboard')
         else: 
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def allow_requests_staff(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            UserRoles.objects.filter(role=request.POST['principal']).update(accept_requests= request.POST['accept_requests_1'])
+            UserRoles.objects.filter(role=request.POST['hod']).update(accept_requests= request.POST['accept_requests_2'])
+            UserRoles.objects.filter(role=request.POST['facultyIncharge']).update(accept_requests= request.POST['accept_requests_3'])
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def allow_requests_gs(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['gs'] == 'GS':
+                UserRoles.objects.filter(role='GS').update(accept_requests= request.POST['accept_requests'])
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def allow_requests_council_member(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['gs'] == 'GS':
+                UserRoles.objects.filter(role='GS').update(accept_requests= request.POST['accept_requests'])
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def allow_requests_student_head(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.POST['student_head'] == 'Council Member':
+                UserRoles.objects.filter(role='Student Head').update(accept_requests= request.POST['accept_requests'])
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def approve_requests(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            role = RoleRequests.objects.get(role= request.POST['role'])
+            RoleRequests.objects.filter(user= request.user.id).filter(role= role).update(is_approved= request.POST['response'])
+            if request.POST['role'] == 'Principal':
+                Staff.objects.filter(user= request.user.id).update(is_principal= True)
+            elif request.POST['role'] == 'HOD':
+                Staff.objects.filter(user= request.user.id).update(is_hod= True)
+            elif request.POST['role'] == 'Faculty Incharge':
+                faculty = Staff.objects.get(user= request.user.id)
+                facultyIncharge = FacultyHead.objects.create(
+                    council = Council.objects.filter(name= request.POST['council_name']),
+                    staff = faculty
+                )
+                facultyIncharge.save()
+            elif request.POST['role'] == 'GS':
+                Student.objects.filter(user= request.user.id).update(is_gs= True)
+            elif request.POST['role'] == 'Council Member':
+                student = Student.objects.get(user = request.user.id)
+                council = Council.objects.get(name= request.POST['council_name'])
+                council_member = CouncilMember.objects.create(
+                    council= council,
+                    student= student
+                )
+                council_member.save()
+            elif request.POST['role'] == 'Student Head':
+                student = Student.objects.get(user = request.user.id)
+                council = Council.objects.get(name= request.POST['council_name'])
+                student_head = StudentHead.objects.create(
+                    council= council,
+                    student= student
+                )
+                student_head.save()
+                return redirect('/dashboard')
+        else:
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
