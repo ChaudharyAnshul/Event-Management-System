@@ -76,3 +76,5 @@ class StudentIdMap_Admin(admin.ModelAdmin):
 
 admin.site.register(StudentIdMap, StudentIdMap_Admin)
 admin.site.register(UserRoles)
+
+admin.site.register(RoleRequests)

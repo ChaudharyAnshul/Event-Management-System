@@ -10,7 +10,8 @@
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
             <h3 class="box-title">Role Request Form</h3>
-            <form class="form-horizontal form-material">
+            <form class="form-horizontal form-material" method="POST" action="{% url 'allow_requests_staff' %}">
+                {% csrf_token %}
                 <div class="table-responsive">
                     <table class="table text-nowrap">
                         <thead>
@@ -26,8 +27,9 @@
                                 <td>1</td>
                                 <td>Principal</td>
                                 <td>
-                                    <input type="text" name="principal" value="Principal" disabled style="display: none;">
+                                    <input type="text" name="principal" value="Principal"  style="display: none;">
                                     <div class="switch">
+                                        {% if P_role.accept_requests %}
                                         <input type="radio" class="switch-input" name="accept_requests_1" value="True"
                                             id="principal1" checked>
                                         <label for="principal1" class="switch-label switch-label-off">ON</label>
@@ -35,6 +37,15 @@
                                             id="principal2">
                                         <label for="principal2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
+                                        {% else %}
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="True"
+                                            id="principal1">
+                                        <label for="principal1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="False"
+                                            id="principal2" checked>
+                                        <label for="principal2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
@@ -42,8 +53,9 @@
                                 <td>2</td>
                                 <td>Department HODs</td>
                                 <td>
-                                    <input type="text" name="hod" value="HOD" disabled style="display: none;">
+                                    <input type="text" name="hod" value="HOD" style="display: none;">
                                     <div class="switch">
+                                        {% if h_role.accept_requests %}
                                         <input type="radio" class="switch-input" name="accept_requests_2" value="True"
                                             id="hod1" checked>
                                         <label for="hod1" class="switch-label switch-label-off">ON</label>
@@ -51,6 +63,15 @@
                                             id="hod2">
                                         <label for="hod2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
+                                        {% else %}
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="True"
+                                            id="hod1">
+                                        <label for="hod1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="False"
+                                            id="hod2" checked>
+                                        <label for="hod2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
@@ -58,8 +79,9 @@
                                 <td>3</td>
                                 <td>Faculty Incharges</td>
                                 <td>
-                                    <input type="text" name="facultyIncharge" value="Faculty Incharge" disabled style="display: none;">
+                                    <input type="text" name="facultyIncharge" value="Faculty Incharge" style="display: none;">
                                     <div class="switch">
+                                        {% if f_role.accept_requests %}
                                         <input type="radio" class="switch-input" name="accept_requests_3" value="True"
                                             id="facultyIncharge1" checked>
                                         <label for="facultyIncharge1" class="switch-label switch-label-off">ON</label>
@@ -67,6 +89,15 @@
                                             id="facultyIncharge2">
                                         <label for="facultyIncharge2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
+                                        {% else %}
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="True"
+                                            id="facultyIncharge1">
+                                        <label for="facultyIncharge1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="False"
+                                            id="facultyIncharge2" checked>
+                                        <label for="facultyIncharge2" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                        {% endif %}
                                     </div>
                                 </td>
                             </tr>
