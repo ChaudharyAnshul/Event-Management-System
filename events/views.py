@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as django_logout
 from .models import *
 from django.contrib import messages
+
+from datetime import datetime
 # Create your views here.
 
 
@@ -199,7 +201,7 @@ def allow_requests_gs(request):
 def allow_requests_council_member(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            if request.POST['gs'] == 'GS':
+            if request.POST['council_member'] == 'Council Member':
                 UserRoles.objects.filter(role='GS').update(accept_requests= request.POST['accept_requests'])
         else:
             messages.info(request, 'Wrong Request Method')
@@ -209,7 +211,7 @@ def allow_requests_council_member(request):
 def allow_requests_student_head(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            if request.POST['student_head'] == 'Council Member':
+            if request.POST['student_head'] == 'Student Head':
                 UserRoles.objects.filter(role='Student Head').update(accept_requests= request.POST['accept_requests'])
         else:
             messages.info(request, 'Wrong Request Method')
@@ -220,7 +222,7 @@ def approve_requests(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             role = RoleRequests.objects.get(role= request.POST['role'])
-            RoleRequests.objects.filter(user= request.user.id).filter(role= role).update(is_approved= request.POST['response'])
+            RoleRequests.objects.filter(user= request.user.id).filter(role= role).update(is_approved= request.POST['response'], approve_time= datetime.now())
             if request.POST['role'] == 'Principal':
                 Staff.objects.filter(user= request.user.id).update(is_principal= True)
             elif request.POST['role'] == 'HOD':
@@ -313,3 +315,21 @@ def myEventsDetail(request, eventId):
         user_data.update({'event':event})
         user_data.update({'reg':False})
         return render(request, 'Dashboard/event.html',user_data)
+
+def add_request(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user = authUser.objects.get(id= request.user.id)
+            role = UserRoles.objects.get(role= request.POST['role'])
+            council = UserRoles.objects.get(belongsTo= request.POST['belongsTo'])
+            new_request = RoleRequests.objects.create(
+                user= user,
+                role= role,
+                belongsTo= council,
+            )
+            new_request.save()
+            return redirect('/dashboard')
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
