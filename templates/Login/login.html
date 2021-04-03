@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +32,7 @@
                                 <div class="flip-box-front">
                                     <h4 style="margin-top: 3rem;">Welcome</h4>
                                     <h3>Login To your account</h3>
-                                    <a href=""><button class="btn btn-primary" style="margin-top: 5rem;"> Sign in with
+                                    <a href="{% provider_login_url 'google' %}"><button class="btn btn-primary" style="margin-top: 5rem;"> Sign in with
                                             Google</button></a>
                                 </div>
                             </div>
