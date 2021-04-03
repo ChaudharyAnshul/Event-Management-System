@@ -115,7 +115,7 @@ class UserRoles(models.Model):
 class RoleRequests(models.Model):
     user = models.ForeignKey(authUser, on_delete= models.CASCADE)
     role = models.ForeignKey(UserRoles, on_delete= models.CASCADE)
-    belongsTo = models.ForeignKey(Council, on_delete= models.CASCADE)
+    belongsTo = models.ForeignKey(Council, on_delete= models.CASCADE, default=None, null=True)
     request_time = models.DateTimeField(auto_now_add=True)
-    approve_time = models.DateTimeField()
+    approve_time = models.DateTimeField(null= True, default=None)
     is_approved = models.BooleanField(default=None, null=True)

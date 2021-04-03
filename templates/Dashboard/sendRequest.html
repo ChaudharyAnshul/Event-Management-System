@@ -1,0 +1,198 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/Dashboard/sendRequest.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if role_name == 'Student' %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for General Secretary</h3>
+            <div>
+                <form class="form-horizontal form-material" method="post" action="/addRequest/">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="GS" style="display: none;">
+                    <input type="text" name="belongsTo" value="null" style="display: none;">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for Student Head</h3>
+            <div>
+                <form class="form-horizontal form-material" action="/addRequest/" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="Student Head" style="display: none;">
+                    <div style="margin-bottom: 10px;">
+                        <select class="form-select" aria-label="Default select example" name="belongsTo">
+                            <option selected>Select your Council</option>
+                            <option value="Code Cell">Code Cell</option>
+                            <option value="CSI-VESIT">CSI-VESIT</option>
+                            <option value="Cultural Council">Cultural Council</option>
+                            <option value="E-Cell">E-Cell</option>
+                            <option value="IEEE-VESIT">IEEE-VESIT</option>
+                            <option value="Institute Innovation Cell(IIC)">Institute Innovation Cell(IIC)</option>
+                            <option value="ISA-VESIT">ISA-VESIT</option>
+                            <option value="ISTE-VESIT">ISTE-VESIT</option>
+                            <option value="Music Council">Music Council</option>
+                            <option value="SORT Council">SORT Council</option>
+                            <option value="Sports Council">Sports Council</option>
+                            <option value="VESIT Renaissance Cell(VRC)">VESIT Renaissance Cell(VRC)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for Council Member</h3>
+            <div>
+                <form class="form-horizontal form-material" action="/addRequest/" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="Council Member" style="display: none;">
+                    <div style="margin-bottom: 10px;">
+                        <select class="form-select" aria-label="Default select example" name="belongsTo">
+                            <option selected>Select your Council</option>
+                            <option value="Code Cell">Code Cell</option>
+                            <option value="CSI_VESIT">CSI_VESIT</option>
+                            <option value="Cultural Council">Cultural Council</option>
+                            <option value="E-Cell">E-Cell</option>
+                            <option value="IEEE-VESIT">IEEE-VESIT</option>
+                            <option value="Institute Innovation Cell(IIC)">Institute Innovation Cell(IIC)</option>
+                            <option value="ISA-VESIT">ISA-VESIT</option>
+                            <option value="ISTE-VESIT">ISTE-VESIT</option>
+                            <option value="Music Council">Music Council</option>
+                            <option value="SORT Council">SORT Council</option>
+                            <option value="Sports Council">Sports Council</option>
+                            <option value="VESIT Renaissance Cell(VRC)">VESIT Renaissance Cell(VRC)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+{% if role_name == 'Staff' %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for Principal</h3>
+            <div>
+                <form class="form-horizontal form-material" action="/addRequest/" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="Principal" style="display: none;">
+                    <input type="text" name="belongsTo" value="null" style="display: none;">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for HOD</h3>
+            <div>
+                <form class="form-horizontal form-material" action="/addRequest/" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="HOD" style="display: none;">
+                    <div style="margin-bottom: 10px;">
+                        <select class="form-select" aria-label="Default select example" name="belongsTo">
+                            <option selected>Select your Department</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Electronics and Telecommunication">Electronics and Telecommunication</option>
+                            <option value="Instrumentation">Instrumentation</option>
+                            <option value="MCA">MCA</option>
+                            
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Send Request for Faculty Incharge</h3>
+            <div>
+                <form class="form-horizontal form-material" action="/addRequest/" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="role" value="Faculty Incharge" style="display: none;">
+                    <div style="margin-bottom: 10px;">
+                        <select class="form-select" aria-label="Default select example" name="belongsTo">
+                            <option selected>Select your Council</option>
+                            <option value="Code Cell">Code Cell</option>
+                            <option value="CSI_VESIT">CSI_VESIT</option>
+                            <option value="Cultural Council">Cultural Council</option>
+                            <option value="E-Cell">E-Cell</option>
+                            <option value="IEEE-VESIT">IEEE-VESIT</option>
+                            <option value="Institute Innovation Cell(IIC)">Institute Innovation Cell(IIC)</option>
+                            <option value="ISA-VESIT">ISA-VESIT</option>
+                            <option value="ISTE-VESIT">ISTE-VESIT</option>
+                            <option value="Music Council">Music Council</option>
+                            <option value="SORT Council">SORT Council</option>
+                            <option value="Sports Council">Sports Council</option>
+                            <option value="VESIT Renaissance Cell(VRC)">VESIT Renaissance Cell(VRC)</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
