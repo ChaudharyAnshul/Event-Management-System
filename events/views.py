@@ -8,6 +8,11 @@ from django.contrib import messages
 def login(request):
     return render(request, 'Login/login.html')
 
+def dashboard(request):
+    return render(request, 'Dashboard/dashboard.html')
+
+def profile(request):
+    return render(request, 'Dashboard/profile.html')
 def registration(request):
     if request.user.is_authenticated:
         if not Student.objects.filter(user = request.user.id).exists() and not Staff.objects.filter(user = request.user.id).exists():
