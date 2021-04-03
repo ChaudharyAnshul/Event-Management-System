@@ -167,12 +167,12 @@ def event_registration(request, eventId):
 
 @login_required(login_url = '/')
 def viewEvents(request, council,eventId):
-  if request.method == 'GET':
+    if request.method == 'GET':
         user_data = get_user_data(request)
         event = Event.objects.get(id = eventId)
         user_data.update({'event':event})
         return render(request, 'Dashboard/editEvents.html', user_data)
-      
+    
 @login_required(login_url = '/')
 def allEvents(request):
     if request.method == 'GET':
@@ -213,7 +213,7 @@ def editEvents(request, council, eventId):
             payment_no = request.POST['payment_no'],
         )
         return redirect('/manageEvents')
- 
+
 
 @login_required(login_url = '/') 
 def myEventsDetail(request, eventId):
