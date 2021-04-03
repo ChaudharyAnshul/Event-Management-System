@@ -5,6 +5,9 @@ from django.contrib.auth.models import User as authUser
 class Department(models.Model):
     name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
+
 def student_photo_upload(instance, filename):
     return "Photos/Students/{}".format(filename)
 
@@ -17,6 +20,9 @@ class Student(models.Model):
     mobile_no = models.IntegerField()
     is_gs = models.BooleanField(default=False) 
     photo = models.FileField(upload_to=student_photo_upload)
+
+    def __str__(self):
+        return str(self.user)
 
 def staff_photo_upload(instance, filename):
     return "Photos/Staff/{}".format(filename)
@@ -32,6 +38,9 @@ class Staff(models.Model):
     is_hod = models.BooleanField(default=False)
     photo = models.FileField(upload_to=staff_photo_upload)
 
+    def __str__(self):
+        return str(self.user)
+
 class StaffIdMap(models.Model):
     email = models.CharField(max_length=100)
     eid = models.IntegerField()
@@ -42,10 +51,13 @@ class StudentIdMap(models.Model):
 
 class Council(models.Model):
     name = models.CharField(max_length=100)
-    dept = models.ForeignKey(Department, default=None, on_delete=models.CASCADE)
+    dept = models.ForeignKey(Department, default=None, null=True, on_delete=models.CASCADE)
     is_institute = models.BooleanField(default=False)
     is_department = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
     # faculty and student head table 
 
 class FacultyHead(models.Model):
@@ -61,6 +73,9 @@ class CouncilMember(models.Model):
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
     can_edit = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.student)
+
 def poster_upload(instance, filename):
     return "Events/Posters/{}".format(filename)
 
@@ -75,6 +90,9 @@ class Event(models.Model):
     registration_fee = models.IntegerField()
     payment_no = models.IntegerField()
     is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 
 class EventRegistration(models.Model):
     event = models.ForeignKey(Event, on_delete= models.CASCADE)
