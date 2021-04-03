@@ -153,3 +153,6 @@ def adminDashboard(request):
 
 def roleRequest(request):
     return render(request, 'Dashboard/roleRequest.html')
+
+def approveRequest(request):
+    return render(request, 'Dashboard/approveRequest.html')
