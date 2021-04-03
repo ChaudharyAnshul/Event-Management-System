@@ -10,43 +10,16 @@
 <!-- Three charts -->
 <!-- ============================================================== -->
 <div class="row justify-content-center">
+    {% for coun in councils %}
     <div class="col-lg-4 col-md-12">
-        <a href="{% url 'manageEventsCouncil' %}" class="a-tag">
+        <a href="{% url 'manageEventsCouncil' coun.council %}" class="a-tag">
             <div class="white-box analytics-info" style="border-radius: 7px;">
-                <h3 class="box-title center">Council Name</h3>
+                <h3 class="box-title center">{{coun.council}}</h3>
             </div>
         </a>
     </div>
-
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'manageEventsCouncil' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council Name</h3>
-        </div>
-        </a>
-    </div>
-
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'manageEventsCouncil' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council Name</h3>
-        </div>
-    </a>
-    </div>
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'manageEventsCouncil' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council Name</h3>
-        </div>
-    </a>
-    </div>
-    <div class="col-lg-4 col-md-12">
-        <a href="{% url 'manageEventsCouncil' %}" class="a-tag">
-        <div class="white-box analytics-info" style="border-radius: 7px;">
-            <h3 class="box-title center">Council Name</h3>
-        </div>
-    </a>
-    </div>
+    {% endfor %}
+    
 </div>
 
 
