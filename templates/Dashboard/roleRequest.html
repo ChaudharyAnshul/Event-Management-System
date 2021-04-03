@@ -28,12 +28,12 @@
                                 <td>
                                     <input type="text" name="principal" value="Principal" disabled style="display: none;">
                                     <div class="switch">
-                                        <input type="radio" class="switch-input" name="accept_requests_1" value="week"
-                                            id="week" checked>
-                                        <label for="week" class="switch-label switch-label-off">ON</label>
-                                        <input type="radio" class="switch-input" name="accept_requests_1" value="month"
-                                            id="month">
-                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="True"
+                                            id="principal1" checked>
+                                        <label for="principal1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="False"
+                                            id="principal2">
+                                        <label for="principal2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
                                     </div>
                                 </td>
@@ -44,12 +44,12 @@
                                 <td>
                                     <input type="text" name="hod" value="HOD" disabled style="display: none;">
                                     <div class="switch">
-                                        <input type="radio" class="switch-input" name="accept_requests_2" value="week"
-                                            id="week" checked>
-                                        <label for="week" class="switch-label switch-label-off">ON</label>
-                                        <input type="radio" class="switch-input" name="accept_requests_2" value="month"
-                                            id="month">
-                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="True"
+                                            id="hod1" checked>
+                                        <label for="hod1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="False"
+                                            id="hod2">
+                                        <label for="hod2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
                                     </div>
                                 </td>
@@ -60,12 +60,12 @@
                                 <td>
                                     <input type="text" name="facultyIncharge" value="Faculty Incharge" disabled style="display: none;">
                                     <div class="switch">
-                                        <input type="radio" class="switch-input" name="accept_requests_3" value="week"
-                                            id="week" checked>
-                                        <label for="week" class="switch-label switch-label-off">ON</label>
-                                        <input type="radio" class="switch-input" name="accept_requests_3" value="month"
-                                            id="month">
-                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="True"
+                                            id="facultyIncharge1" checked>
+                                        <label for="facultyIncharge1" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="False"
+                                            id="facultyIncharge2">
+                                        <label for="facultyIncharge2" class="switch-label switch-label-on">OFF</label>
                                         <span class="switch-selection"></span>
                                     </div>
                                 </td>
@@ -74,6 +74,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="btn-wrapper " style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" style="width: 20%;">Submit</button>
+                </div>    
             </form>
         </div>
     </div>
