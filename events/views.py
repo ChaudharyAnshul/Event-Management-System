@@ -66,3 +66,8 @@ def registrationStudent(request):
             messages.info(request, 'Incorrect Institute ID')
             return redirect('/registration')
     
+def manageEvents(request):
+    return render(request, 'Dashboard/manageEvents.html')
+
+def manageEventsCouncil(request):
+    return render(request, 'Dashboard/manageEventsCouncil.html')
