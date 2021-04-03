@@ -37,4 +37,5 @@ urlpatterns = [
     path('sendRequest', views.sendRequest, name='sendRequest'),
     path('yourCouncil', views.yourCouncil, name='yourCouncil'),
     path('yourCouncilDetails/<council>', views.yourCouncilDetails, name='yourCouncilDetails'),
+    path('addRequest/', views.add_request),
 ]
