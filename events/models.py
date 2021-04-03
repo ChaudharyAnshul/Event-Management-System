@@ -102,3 +102,20 @@ class EventWinner(models.Model):
     event = models.ForeignKey(Event, on_delete= models.CASCADE)
     student = models.ForeignKey(Student, on_delete= models.CASCADE)
     place = models.IntegerField()
+
+class UserRoles(models.Model):
+    role = models.CharField(max_length=100)
+    is_staff = models.BooleanField(default=False)
+    is_student = models.BooleanField(default=False)
+    accept_requests = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.role
+
+class RoleRequests(models.Model):
+    user = models.ForeignKey(authUser, on_delete= models.CASCADE)
+    role = models.ForeignKey(UserRoles, on_delete= models.CASCADE)
+    belongsTo = models.ForeignKey(Council, on_delete= models.CASCADE)
+    request_time = models.DateTimeField(auto_now_add=True)
+    approve_time = models.DateTimeField()
+    is_approved = models.BooleanField(default=None, null=True)

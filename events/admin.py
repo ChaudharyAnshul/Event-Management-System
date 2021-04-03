@@ -75,3 +75,4 @@ class StudentIdMap_Admin(admin.ModelAdmin):
     list_filter = ('email', )
 
 admin.site.register(StudentIdMap, StudentIdMap_Admin)
+admin.site.register(UserRoles)
