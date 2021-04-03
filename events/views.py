@@ -26,7 +26,7 @@ def dashboard(request):
             role_name = 'Student'
             if CouncilMember.objects.filter(student = role).exists():
                 in_council = True
-            if CouncilMember.objects.filter(student = role).exists():
+            if CouncilMember.objects.filter(student = role, can_edit=True).exists():
                 can_edit = True
         elif Staff.objects.filter(user = user).exists():
             role = Staff.objects.get(user = user)
