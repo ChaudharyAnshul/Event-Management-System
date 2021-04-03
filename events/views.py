@@ -133,17 +133,59 @@ def add_event(request):
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
-
-def event_registration(request):
+    
+@login_required(login_url = '/')
+def event_registration(request, eventId):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            register = EventRegistration.objects.create(
-                event = request.POST['event'],
-                student = request.user.id
-            )
-            register.save()
-            return redirect('/dashboard')
+            event = Event.objects.get(id = eventId)
+            student = Student.objects.get(user = request.user.id)
+            if EventRegistration.objects.filter(event = event,student = student).exists():
+                messages.info(request, 'Already Registered!')
+                return redirect('/allEvents')
+            else:
+                register = EventRegistration.objects.create(
+                    event = event,
+                    student = student
+                )
+                register.save()
+                return redirect('/dashboard')
         else: 
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
+
+@login_required(login_url = '/')
+def allEvents(request):
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        events = Event.objects.all()
+        user_data.update({'events':events})
+        return render(request, 'Dashboard/allEvents.html', user_data)
+
+@login_required(login_url = '/')
+def myEvents(request):
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        student = Student.objects.get(user = request.user.id)
+        events = EventRegistration.objects.filter(student = student)
+        user_data.update({'events':events}) 
+        return render(request, 'Dashboard/myEvents.html', user_data)
+
+@login_required(login_url = '/')
+def event(request, eventId):
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        event = Event.objects.get(id = eventId)
+        user_data.update({'event':event})
+        user_data.update({'reg':True})
+        return render(request, 'Dashboard/event.html',user_data)
+
+@login_required(login_url = '/') 
+def myEventsDetail(request, eventId):
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        event = Event.objects.get(id = eventId)
+        user_data.update({'event':event})
+        user_data.update({'reg':False})
+        return render(request, 'Dashboard/event.html',user_data)
