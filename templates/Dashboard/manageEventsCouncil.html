@@ -91,7 +91,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-material">
+                <form class="form-horizontal form-material" method="POST" action="{% url 'addEvent' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="form-group mb-4">
                         <label class="col-md-12 p-0">Name of the Event <span style="color: red;">*</span></label>
                         <div class="col-md-12 border-bottom p-0">
@@ -147,11 +148,11 @@
                             <button class="btn btn-success">Update Profile</button>
                         </div>
                     </div> -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info">Add Event</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Add Event</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

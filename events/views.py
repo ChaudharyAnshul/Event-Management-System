@@ -15,45 +15,37 @@ def logout(request):
     logout(request)
     return redirect('/')
 
+def get_user_data(request):
+    user = authUser.objects.get(id = request.user.id)
+    can_edit = False
+    in_council = False
+    if Student.objects.filter(user = user).exists():
+        role = Student.objects.get(user = user)
+        role_name = 'Student'
+        if CouncilMember.objects.filter(student = role).exists():
+            in_council = True
+        if CouncilMember.objects.filter(student = role, can_edit=True).exists():
+            can_edit = True
+    elif Staff.objects.filter(user = user).exists():
+        role = Staff.objects.get(user = user)
+        role_name = 'Staff'
+        if FacultyHead.objects.filter(staff = role).exists():
+            can_edit = True
+    
+    user_data = {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'in_council':in_council}
+    return user_data
+
 @login_required(login_url = '/')
 def dashboard(request):
     if request.method == 'GET':
-        user = authUser.objects.get(id = request.user.id)
-        can_edit = False
-        in_council = False
-        if Student.objects.filter(user = user).exists():
-            role = Student.objects.get(user = user)
-            role_name = 'Student'
-            if CouncilMember.objects.filter(student = role).exists():
-                in_council = True
-            if CouncilMember.objects.filter(student = role, can_edit=True).exists():
-                can_edit = True
-        elif Staff.objects.filter(user = user).exists():
-            role = Staff.objects.get(user = user)
-            role_name = 'Staff'
-            if FacultyHead.objects.filter(staff = role).exists():
-                can_edit = True
-        return render(request, 'Dashboard/dashboard.html', {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'in_council':in_council})
+        user_data = get_user_data(request)
+        return render(request, 'Dashboard/dashboard.html', user_data)
 
 @login_required(login_url = '/')
 def profile(request):
     if request.method == 'GET':
-        user = authUser.objects.get(id = request.user.id)
-        can_edit = False
-        in_council = False
-        if Student.objects.filter(user = user).exists():
-            role = Student.objects.get(user = user)
-            role_name = 'Student'
-            if CouncilMember.objects.filter(student = role).exists():
-                in_council = True
-            if CouncilMember.objects.filter(student = role).exists():
-                can_edit = True
-        elif Staff.objects.filter(user = user).exists():
-            role = Staff.objects.get(user = user)
-            role_name = 'Staff'
-            if FacultyHead.objects.filter(staff = role).exists():
-                can_edit = True
-        return render(request, 'Dashboard/profile.html', {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'in_council':in_council})
+        user_data = get_user_data(request)
+        return render(request, 'Dashboard/profile.html', user_data)
 
 @login_required(login_url = '/')
 def registration(request):
@@ -111,17 +103,22 @@ def registrationStudent(request):
             return redirect('/registration')
     
 def manageEvents(request):
-    return render(request, 'Dashboard/manageEvents.html')
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        return render(request, 'Dashboard/manageEvents.html', user_data)
 
 def manageEventsCouncil(request):
-    return render(request, 'Dashboard/manageEventsCouncil.html')
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        return render(request, 'Dashboard/manageEventsCouncil.html', user_data)
 
 def add_event(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
+            councli = Council.objects.get(name = request.POST['council'])
             event = Event.objects.create(
                 name = request.POST['name'],
-                council = request.POST['council'],
+                council = councli,
                 is_approved = False,
                 date = request.POST['date'],
                 description = request.POST['description'],
@@ -131,7 +128,7 @@ def add_event(request):
                 is_active = False
             )
             event.save()
-            return redirect('/dashboard')
+            return redirect('/manageEvents/council')
         else:
             messages.info(request, 'Wrong Request Method')
     else:
