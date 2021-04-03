@@ -8,3 +8,7 @@ def login(request):
 
 def dashboard(request):
     return render(request, 'Dashboard/dashboard.html')
+
+def profile(request):
+    return render(request, 'Dashboard/profile.html')
+    
