@@ -11,4 +11,6 @@ urlpatterns = [
     path('registration/student', views.registrationStudent, name='registration student'),
     path('manageEvents', views.manageEvents, name='manageEvents'),
     path('manageEvents/coucil', views.manageEventsCouncil, name='manageEventsCouncil'),
+    path('logout', views.logout, name='logout'),
+    
 ]
