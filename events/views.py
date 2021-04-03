@@ -8,6 +8,8 @@ from django.contrib import messages
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/dashboard')
     return render(request, 'Login/login.html')
 
 @login_required(login_url = '/')
@@ -19,11 +21,13 @@ def get_user_data(request):
     user = authUser.objects.get(id = request.user.id)
     can_edit = False
     in_council = False
+    councils = None
     if Student.objects.filter(user = user).exists():
         role = Student.objects.get(user = user)
         role_name = 'Student'
         if CouncilMember.objects.filter(student = role).exists():
             in_council = True
+            councils = CouncilMember.objects.filter(student = role)
         if CouncilMember.objects.filter(student = role, can_edit=True).exists():
             can_edit = True
     elif Staff.objects.filter(user = user).exists():
@@ -32,7 +36,7 @@ def get_user_data(request):
         if FacultyHead.objects.filter(staff = role).exists():
             can_edit = True
     
-    user_data = {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'in_council':in_council}
+    user_data = {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'councils':councils, 'in_council':in_council}
     return user_data
 
 @login_required(login_url = '/')
@@ -107,9 +111,13 @@ def manageEvents(request):
         user_data = get_user_data(request)
         return render(request, 'Dashboard/manageEvents.html', user_data)
 
-def manageEventsCouncil(request):
+def manageEventsCouncil(request, council):
     if request.method == 'GET':
         user_data = get_user_data(request)
+        council_obj = Council.objects.get(name = council)
+        user_data.update({'sel_council':council})
+        events = Event.objects.filter(council = council_obj)
+        user_data.update({'events':events})
         return render(request, 'Dashboard/manageEventsCouncil.html', user_data)
 
 def add_event(request):
@@ -128,7 +136,7 @@ def add_event(request):
                 is_active = False
             )
             event.save()
-            return redirect('/manageEvents/council')
+            return redirect('/manageEvents')
         else:
             messages.info(request, 'Wrong Request Method')
     else:
