@@ -358,21 +358,29 @@ def add_request(request):
         if request.method == 'POST':
             user = authUser.objects.get(id= request.user.id)
             role = UserRoles.objects.get(role= request.POST['role'])
-            council = UserRoles.objects.get(belongsTo= request.POST['belongsTo'])
-            new_request = RoleRequests.objects.create(
-                user= user,
-                role= role,
-                belongsTo= council,
-            )
+            print(request.POST['belongsTo'])
+            if request.POST['belongsTo'] != "null":
+                council = Council.objects.get(name= request.POST['belongsTo'])
+                new_request = RoleRequests.objects.create(
+                    user= user,
+                    role= role,
+                    belongsTo= council,
+                )
+            else:
+                new_request = RoleRequests.objects.create(
+                    user= user,
+                    role= role,
+                )
             new_request.save()
-            return redirect('/dashboard')
+            return redirect('/sendRequest')
         else:
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
 
 def sendRequest(request):
-    return render(request, 'Dashboard/sendRequest.html')
+    user_data = get_user_data(request)
+    return render(request, 'Dashboard/sendRequest.html', user_data)
 
 def yourCouncil(request):
     user_data = get_user_data(request)
