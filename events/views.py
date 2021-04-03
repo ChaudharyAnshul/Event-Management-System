@@ -313,3 +313,13 @@ def myEventsDetail(request, eventId):
         user_data.update({'event':event})
         user_data.update({'reg':False})
         return render(request, 'Dashboard/event.html',user_data)
+
+
+def manageRole(request):
+    return render(request, 'Dashboard/manageRole.html')
+
+def studentRoleRequest(request):
+    return render(request, 'Dashboard/studentRoleRequest.html')
+
+def studentApproveRequest(request):
+    return render(request, 'Dashboard/studentApproveRequest.html')

@@ -33,4 +33,8 @@ urlpatterns = [
     path('myEvents', views.myEvents, name='myEvents'),
     path('myEvents/<eventId>', views.myEventsDetail, name='myEventsDetail'),
     path('allevents/<eventId>', views.event, name='event'),
+    path('manageRole', views.manageRole, name='manageRole'),
+    path('studentRoleRequest', views.studentRoleRequest, name='studentRoleRequest'),
+    path('studentApproveRequest', views.studentApproveRequest, name='studentApproveRequest'),
+    
 ]
