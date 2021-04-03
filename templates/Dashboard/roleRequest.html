@@ -1,0 +1,81 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/Dashboard/roleRequest.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Role Request Form</h3>
+            <form class="form-horizontal form-material">
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">#</th>
+                                <th class="border-top-0">Role</th>
+                                <th class="border-top-0" style="text-align: center;">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Principal</td>
+                                <td>
+                                    <input type="text" name="principal" value="Principal" disabled style="display: none;">
+                                    <div class="switch">
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="week"
+                                            id="week" checked>
+                                        <label for="week" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_1" value="month"
+                                            id="month">
+                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Department HODs</td>
+                                <td>
+                                    <input type="text" name="hod" value="HOD" disabled style="display: none;">
+                                    <div class="switch">
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="week"
+                                            id="week" checked>
+                                        <label for="week" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_2" value="month"
+                                            id="month">
+                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Faculty Incharges</td>
+                                <td>
+                                    <input type="text" name="facultyIncharge" value="Faculty Incharge" disabled style="display: none;">
+                                    <div class="switch">
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="week"
+                                            id="week" checked>
+                                        <label for="week" class="switch-label switch-label-off">ON</label>
+                                        <input type="radio" class="switch-input" name="accept_requests_3" value="month"
+                                            id="month">
+                                        <label for="month" class="switch-label switch-label-on">OFF</label>
+                                        <span class="switch-selection"></span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

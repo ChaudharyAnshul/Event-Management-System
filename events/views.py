@@ -147,3 +147,9 @@ def event_registration(request):
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
+
+def adminDashboard(request):
+    return render(request, 'Dashboard/adminDashboard.html')
+
+def roleRequest(request):
+    return render(request, 'Dashboard/roleRequest.html')
