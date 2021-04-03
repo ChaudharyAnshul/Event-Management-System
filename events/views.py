@@ -165,6 +165,16 @@ def event_registration(request, eventId):
     else:
         return redirect('/accounts/google/login')
 
+
+def adminDashboard(request):
+    return render(request, 'Dashboard/adminDashboard.html')
+
+def roleRequest(request):
+    return render(request, 'Dashboard/roleRequest.html')
+
+def approveRequest(request):
+    return render(request, 'Dashboard/approveRequest.html')
+
 def allow_requests_staff(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
