@@ -1,0 +1,40 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/Dashboard/yourCouncil.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Three charts -->
+<!-- ============================================================== -->
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-12">
+        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
+            <div class="white-box analytics-info" style="border-radius: 7px;">
+                <h3 class="box-title center">Council 1</h3>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
+        <div class="white-box analytics-info" style="border-radius: 7px;">
+            <h3 class="box-title center">Council 2</h3>
+        </div>
+        </a>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <a href="{% url 'yourCouncilDetails' %}" class="a-tag">
+        <div class="white-box analytics-info" style="border-radius: 7px;">
+            <h3 class="box-title center">Council 3</h3>
+        </div>
+    </a>
+    </div>
+    
+</div>
+
+
+{% endblock %}

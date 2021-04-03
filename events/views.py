@@ -333,3 +333,9 @@ def add_request(request):
             messages.info(request, 'Wrong Request Method')
     else:
         return redirect('/accounts/google/login')
+
+def yourCouncil(request):
+    return render(request, 'Dashboard/yourCouncil.html')
+
+def yourCouncilDetails(request):
+    return render(request, 'Dashboard/yourCouncilDetails.html')
