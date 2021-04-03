@@ -17,33 +17,34 @@
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
             <!-- <div class="container"> -->
-                <h1 class="font">Event Name</h1>
+                <h1 class="font">{{event.name}}</h1>
                 <div class="d-md-flex">
                     <ul class="list-inline d-flex ms-auto">
                         <li class="ps-3">
-                            <h3 class=" font">Date: May 26, 2021</h3>
+                            <h3 class=" font">{{event.date}}</h3>
                         </li>
                     </ul>
                 </div>
             <!-- </div> -->
             <div class="poster-container center">
-                <img src="{% static 'images/background.png' %}" alt="poster">
+                <img src="/media/{{event.poster}}" alt="poster">
             </div>
             <div class="content">
                 <h4 class="font">Description:</h4>
-                <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae harum eaque minima quas provident unde facere quibusdam quidem laborum ut ipsum error iusto, nostrum ad! Excepturi, voluptas deserunt. Velit, officia?Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae harum eaque minima quas provident unde facere quibusdam quidem laborum ut ipsum error iusto, nostrum ad! Excepturi, voluptas deserunt. Velit, officia?Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae harum eaque minima quas provident unde facere quibusdam quidem laborum ut ipsum error iusto, nostrum ad! Excepturi, voluptas deserunt. Velit, officia?Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae harum eaque minima quas provident unde facere quibusdam quidem laborum ut ipsum error iusto, nostrum ad! Excepturi, voluptas deserunt. Velit, officia?</p>
+                <p class="para-font">{{event.description}}</p>
             </div>
             <div class="payment">
-                <h4 class="font">Registration Fee: Rs. 10</h4>
-                <h4 class="font">Payment Number: 1234567890</h4>
+                <h4 class="font">Registration Fee: Rs. {{event.registration_fee}}</h4>
+                <h4 class="font">Payment Number: {{event.payment_no}}</h4>
             </div>
+            {% if reg %}
             <div class="register center">
                 <button type="button" class="btn custom-btn para-font" data-toggle="modal"
                 data-target="#register" data-backdrop='static' data-keyboard='false'>
                     Register
                 </button>
             </div>
-            
+            {% endif %}
         </div>
     </div>
 </div>
@@ -61,7 +62,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-material" method="POST" action="" enctype="multipart/form-data">
+                <form class="form-horizontal form-material" method="POST" action="{% url 'eventRegistration' event.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <h3 class="para-font">Are you sure you wish to register?</h3>
                     <!-- <div class="form-group mb-4">
