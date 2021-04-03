@@ -1,0 +1,83 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/Dashboard/yourCouncilDetail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Your Council Members</h3>
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">Event Name</th>
+                            <th class="border-top-0">Event By</th>
+                            <th class="border-top-0">Date</th>
+                            <th class="border-top-0">Result</th>
+                            <th class="border-top-0">View Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                        <tr>
+                            <td>1</td>
+                            <td><img src="/media/{{event.event.poster}}" alt="user-img"
+                                    width="36" class="img-circle"><span class="font-medium"
+                                    style="padding-left: 5px;">{{event.event.name}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">{{event.event.council}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">{{event.event.date}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">Participant</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;"><a href="{% url 'myEventsDetail' event.event.id %}"><button
+                                class="btn btn-warning">View Details</button></a></span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="white-box">
+            <h3 class="box-title">Your Events</h3>
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">Event Name</th>
+                            <th class="border-top-0">Event By</th>
+                            <th class="border-top-0">Date</th>
+                            <th class="border-top-0">Result</th>
+                            <th class="border-top-0">View Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in events %}
+                        <tr>
+                            <td>1</td>
+                            <td><img src="/media/{{event.event.poster}}" alt="user-img"
+                                    width="36" class="img-circle"><span class="font-medium"
+                                    style="padding-left: 5px;">{{event.event.name}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">{{event.event.council}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">{{event.event.date}}</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;">Participant</span></td>
+                            <td><span class="font-medium" style="padding-left: 5px;"><a href="{% url 'myEventsDetail' event.event.id %}"><button
+                                class="btn btn-warning">View Details</button></a></span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
