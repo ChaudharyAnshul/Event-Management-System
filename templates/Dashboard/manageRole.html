@@ -1,0 +1,31 @@
+{% extends 'Dashboard/base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/Dashboard/manageRole.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Three charts -->
+<!-- ============================================================== -->
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-12">
+        <a href="{% url 'studentRoleRequest' %}" class="a-tag">
+            <div class="white-box analytics-info" style="border-radius: 7px;">
+                <h3 class="box-title center">Role Request Form</h3>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-lg-4 col-md-12">
+        <a href="{% url 'studentApproveRequest' %}" class="a-tag">
+        <div class="white-box analytics-info" style="border-radius: 7px;">
+            <h3 class="box-title center">Approval Requests</h3>
+        </div>
+        </a>
+    </div>
+    
+</div>
+
+{% endblock %}
