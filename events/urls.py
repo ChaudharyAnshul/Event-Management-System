@@ -16,4 +16,9 @@ urlpatterns = [
     path('eventRegistration', views.event_registration, name='eventRegistration'),
     path('manageEvents/<council>/viewEvents/<eventId>', views.viewEvents, name='viewEvents'),
     path('manageEvents/<council>/viewEvents/<eventId>/edit', views.editEvents, name='editEvents'),
+    path('allevents/<eventId>/eventRegistration', views.event_registration, name='eventRegistration'),
+    path('allEvents', views.allEvents, name='allEvents'),
+    path('myEvents', views.myEvents, name='myEvents'),
+    path('myEvents/<eventId>', views.myEventsDetail, name='myEventsDetail'),
+    path('allevents/<eventId>', views.event, name='event'),
 ]
