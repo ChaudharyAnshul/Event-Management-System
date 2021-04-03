@@ -68,12 +68,12 @@ class Event(models.Model):
     name = models.CharField(max_length=100)
     council = models.ForeignKey(Council, on_delete= models.CASCADE)
     is_approved = models.BooleanField(default=False)
-    staff_approved =  models.ForeignKey(Staff, on_delete= models.CASCADE)
+    staff_approved =  models.ForeignKey(Staff, on_delete= models.CASCADE, default= None, null= True)
     date = models.DateTimeField()
     description = models.CharField(max_length=2000)
     poster = models.FileField(upload_to=poster_upload)
-    registration_fee = models.IntegerField()
-    payment_no = models.IntegerField()
+    registration_fee = models.IntegerField(default=0)
+    payment_no = models.IntegerField(default=0)
     is_active = models.BooleanField(default=False)
 
 class EventRegistration(models.Model):
