@@ -32,6 +32,14 @@ class Staff(models.Model):
     is_hod = models.BooleanField(default=False)
     photo = models.FileField(upload_to=staff_photo_upload)
 
+class StaffIdMap(models.Model):
+    email = models.CharField(max_length=100)
+    eid = models.IntegerField()
+
+class StudentIdMap(models.Model):
+    email = models.CharField(max_length=100)
+    iid = models.IntegerField()
+
 class Council(models.Model):
     name = models.CharField(max_length=100)
     dept = models.ForeignKey(Department, default=None, on_delete=models.CASCADE)

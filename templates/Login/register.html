@@ -1,0 +1,143 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/Login/register.css' %}">
+    <title>Register</title>
+</head>
+<body>
+    <section class="forms-section">
+        <h1 class="section-title">Register as Staff or Student</h1>
+        <div class="forms">
+          <div class="form-wrapper is-active">
+            <button type="button" class="switcher switcher-login">
+              Student
+              <span class="underline"></span>
+            </button>
+            <form class="form form-login" method="POST" enctype="multipart/form-data" action="{% url 'registration student' %}">
+              {% csrf_token %}
+              <fieldset>
+                <div class="input-block">
+                  <label for="iid">Institute ID</label>
+                  <input id="iid" type="number" name="iid" required>
+                </div>
+                <div class="input-block">
+                  <label for="dept">Department</label>
+                  <select id='dept' name = "department" required>
+                    <option value = "" selected></option>
+                    <option value = "Computer Science">Computer Science</option>
+                    <option value = "Information Technology">Information Technology</option>
+                    <option value = "Electronics">Electronics</option>
+                    <option value = "Electronics and Telecommunication">Electronics & Telecommunication</option>
+                    <option value = "Instrumentation">Instrumentation</option>
+                    <option value = "MCA">MCA</option>
+                  </select>
+                </div>
+                <div class="input-block">
+                  <label for="div">Division</label>
+                  <select id='div' name = "division" required>
+                    <option value = "" selected></option>
+                    <option value = "D1">D1</option>
+                    <option value = "D2">D2</option>
+                    <option value = "D3">D3</option>
+                    <option value = "D4">D4</option>
+                    <option value = "D5">D5</option>
+                    <option value = "D6">D6</option>
+                    <option value = "D7">D7</option>
+                    <option value = "D8">D8</option>
+                    <option value = "D9">D9</option>
+                    <option value = "D10">D10</option>
+                    <option value = "D11">D11</option>
+                    <option value = "D12">D12</option>
+                    <option value = "D13">D13</option>
+                    <option value = "D14">D14</option>
+                    <option value = "D15">D15</option>
+                    <option value = "D16">D16</option>
+                    <option value = "D17">D17</option>
+                    <option value = "D18">D18</option>
+                    <option value = "D19">D19</option>
+                    <option value = "D20">D20</option>
+                  </select>
+                </div>
+                <div class="input-block">
+                  <label for="">Gender</label>
+                  <select id='gender' name = "gender" required>
+                    <option value = "" selected></option>
+                    <option value = "male">Male</option>
+                    <option value = "female">Female</option>
+                  </select>
+                </div>
+                <div class="input-block">
+                  <label for="mobile">Mobile Number</label>
+                  <input id="mobile" type="number" name="mobile" required>
+                </div>
+                <div class="input-block">
+                  <label for="photo">Photo</label>
+                  <input id="photo" type="file" name="photo" required>
+                </div>
+              </fieldset>
+              <button type="submit" class="btn-login">Register</button>
+            </form>
+          </div>
+          <div class="form-wrapper">
+            <button type="button" class="switcher switcher-signup">
+              Staff
+              <span class="underline"></span>
+            </button>
+            <form class="form form-signup" method="POST" enctype="multipart/form-data" action="{% url 'registration staff' %}">
+              {% csrf_token %}
+              <fieldset>
+                <div class="input-block">
+                  <label for="eid">Employee ID</label>
+                  <input id="eid" type="number" name="eid" required>
+                </div>
+                <div class="input-block">
+                  <label for="dept">Department</label>
+                  <select id='dept' name = "department" required>
+                    <option value = "" selected></option>
+                    <option value = "Computer Science">Computer Science</option>
+                    <option value = "Information Technology">Information Technology</option>
+                    <option value = "Electronics">Electronics</option>
+                    <option value = "Electronics and Telecommunication">Electronics & Telecommunication</option>
+                    <option value = "Instrumentation">Instrumentation</option>
+                    <option value = "MCA">MCA</option>
+                  </select>
+                </div>
+                <div class="input-block">
+                  <label for="">Gender</label>
+                  <select id='gender' name = "gender" required>
+                    <option value = "" selected></option>
+                    <option value = "male">Male</option>
+                    <option value = "female">Female</option>
+                  </select>
+                </div>
+                <div class="input-block">
+                  <label for="mobile">Mobile Number</label>
+                  <input id="mobile" type="number" name="mobile" required>
+                </div>
+                <div class="input-block">
+                  <label for="Designation">Designation</label>
+                  <input id="Designation" type="text" name="Designation" required>
+                </div>
+                <div class="input-block">
+                  <label for="photo">Photo</label>
+                  <input id="photo" type="file" name="photo" required>
+                </div>
+              </fieldset>
+              <button type="submit" class="btn-signup">Register</button>
+            </form>
+          </div>
+        </div>
+      </section>
+  <script src="{% static 'js/Login/register.js' %}"></script>
+  {% for message in messages %}
+    <script>
+      alert('{{ message }}')
+    </script>
+  {% endfor %}
+</body>
+</html>
