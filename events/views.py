@@ -36,6 +36,9 @@ def get_user_data(request):
         role = Staff.objects.get(user = user)
         role_name = 'Staff'
         if FacultyHead.objects.filter(staff = role).exists():
+            in_council = True
+            councils = FacultyHead.objects.filter(staff = role)
+        if FacultyHead.objects.filter(staff = role).exists():
             can_edit = True
 
     user_data = {'role':role, 'role_name':role_name, 'can_edit':can_edit, 'councils':councils, 'in_council':in_council}
