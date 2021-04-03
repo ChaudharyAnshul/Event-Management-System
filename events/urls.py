@@ -12,5 +12,6 @@ urlpatterns = [
     path('manageEvents', views.manageEvents, name='manageEvents'),
     path('manageEvents/coucil', views.manageEventsCouncil, name='manageEventsCouncil'),
     path('logout', views.logout, name='logout'),
-    
+    path('addEvent', views.add_event, name='addEvent'),
+    path('eventRegistration', views.event_registration, name='eventRegistration'),
 ]

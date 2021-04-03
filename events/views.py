@@ -115,3 +115,38 @@ def manageEvents(request):
 
 def manageEventsCouncil(request):
     return render(request, 'Dashboard/manageEventsCouncil.html')
+
+def add_event(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            event = Event.objects.create(
+                name = request.POST['name'],
+                council = request.POST['council'],
+                is_approved = False,
+                date = request.POST['date'],
+                description = request.POST['description'],
+                poster = request.FILES['poster'],
+                registration_fee = request.POST['registration_fee'],
+                payment_no = request.POST['payment_no'],
+                is_active = False
+            )
+            event.save()
+            return redirect('/dashboard')
+        else:
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
+
+def event_registration(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            register = EventRegistration.objects.create(
+                event = request.POST['event'],
+                student = request.user.id
+            )
+            register.save()
+            return redirect('/dashboard')
+        else: 
+            messages.info(request, 'Wrong Request Method')
+    else:
+        return redirect('/accounts/google/login')
