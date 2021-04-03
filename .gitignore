@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 EventManager/creds.py
+media/
 
 # C extensions
 *.so

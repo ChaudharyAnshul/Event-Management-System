@@ -13,6 +13,7 @@ def dashboard(request):
 
 def profile(request):
     return render(request, 'Dashboard/profile.html')
+
 def registration(request):
     if request.user.is_authenticated:
         if not Student.objects.filter(user = request.user.id).exists() and not Staff.objects.filter(user = request.user.id).exists():
@@ -37,6 +38,7 @@ def registrationStaff(request):
                 photo = request.FILES['photo']  
             )
             staff.save()
+            return redirect('/dashboard')
         else:
             messages.info(request, 'Incorrect Employee ID')
             return redirect('/registration')
@@ -56,6 +58,7 @@ def registrationStudent(request):
                 photo = request.FILES['photo']
             )
             student.save()
+            return redirect('/dashboard')
         else:
             messages.info(request, 'Incorrect Institute ID')
             return redirect('/registration')
