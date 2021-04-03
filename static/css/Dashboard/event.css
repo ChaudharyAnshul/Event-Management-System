@@ -1,0 +1,26 @@
+.center{
+    text-align: center !important;
+}
+
+ .font{
+    font-family: 'Lobster', cursive;
+ }
+
+ .para-font{
+    font-family: 'Kiwi Maru', serif;
+    font-weight: 600;
+ }
+
+ .poster-container{
+     margin-bottom: 20px;
+ }
+ 
+ .custom-btn{
+     background-color: #101010;
+     color:white;
+     width: 20%;
+ }
+
+ .custom-btn:hover{
+     color: white;
+ }
