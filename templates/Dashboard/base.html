@@ -160,7 +160,7 @@
                         </li>
                         {% if user.is_staff %}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'eventApprove' %}"
                                 aria-expanded="false" style="text-decoration: none;">
                                 <i class="fa fa-globe" aria-hidden="true"></i>
                                 <span class="hide-menu">Approve Events</span>
@@ -176,6 +176,7 @@
                             </a>
                         </li>
                         {% endif %}
+                        {% if not user.is_staff %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'myEvents' %}"
                                 aria-expanded="false" style="text-decoration: none;">
@@ -183,6 +184,7 @@
                                 <span class="hide-menu">My Events</span>
                             </a>
                         </li>
+                        {% endif %}
                         {% if user.is_superuser %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'adminDashboard' %}"
@@ -307,6 +309,11 @@
     <script src="{% static 'js/Dashboard/sidebarmenu.js' %}"></script>
     <!--Custom JavaScript -->
     <script src="{% static 'js/Dashboard/custom.js' %}"></script>
+    {% for message in messages %}
+    <script>
+      alert('{{ message }}')
+    </script>
+    {% endfor %}
 </body>
 
 </html>
