@@ -521,3 +521,30 @@ def reject_event(request, councilId):
         Event.objects.filter(id = request.POST['eventId']).update(is_rejected = True)
         # Event.objects.filter(id = request.POST['eventId']).update(staff_approved = user)
         return redirect("/councilEventApprove/"+councilId)
+
+@login_required(login_url = '/')
+def viewReport(request, councilId, eventId):
+    user_data = get_user_data(request)
+    event = Event.objects.get(id= eventId)
+    if Report.objects.filter(event= eventId).exists():
+        report = Report.objects.get(event= eventId)
+        user_data.update({'report': report})
+        is_report = True
+    else:
+        is_report = False
+    user_data.update({'is_report': is_report})
+    user_data.update({'event': event})
+
+    return render(request, 'Dashboard/report.html', user_data)
+
+@login_required(login_url = '/')
+def submitReport(request):
+    user_data = get_user_data(request)
+    event = Event.objects.get(name= request.POST['event'])
+    report = Report.objects.create(
+        event= event,
+        description = request.POST['description']
+    )
+    report.save()
+
+    return redirect('/manageEvents')

@@ -78,4 +78,4 @@ admin.site.register(StudentIdMap, StudentIdMap_Admin)
 admin.site.register(UserRoles)
 
 admin.site.register(RoleRequests)
-admin.site.register(Event)
+# admin.site.register(Event)

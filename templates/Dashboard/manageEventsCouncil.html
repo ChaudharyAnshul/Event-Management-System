@@ -43,6 +43,7 @@
                             <th class="border-top-0">Date</th>
                             <th class="border-top-0">Status</th>
                             <th class="border-top-0">View Details</th>
+                            <th class="border-top-0"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +64,10 @@
                                         <button type="button" class="btn btn-warning">
                                             View Details
                                         </button></a></span></td>
-
+                                        <td><span class="font-medium" style="padding-left: 5px;"><a href="{% url 'viewReport' sel_council event.id %}">
+                                            <button type="button" class="btn btn-warning">
+                                                Report
+                                            </button></a></span></td>
                         </tr>
                         {% endfor %}
                     </tbody>
