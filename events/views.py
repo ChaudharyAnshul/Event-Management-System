@@ -481,3 +481,14 @@ def yourCouncilDetails(request, council):
     user_data.update({'councilMembers': council_members})
     print(council_members.values_list)
     return render(request, 'Dashboard/yourCouncilDetails.html', user_data)
+
+
+def eventApprove(request):
+    user_data = get_user_data(request)
+    return render(request, 'Dashboard/eventApprove.html', user_data)
+
+def councilEventApprove(request):
+    user_data = get_user_data(request)
+    
+    return render(request, 'Dashboard/councilEventApprove.html', user_data)
+

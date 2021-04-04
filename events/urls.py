@@ -42,5 +42,8 @@ urlpatterns = [
     path('yourCouncil', views.yourCouncil, name='yourCouncil'),
     path('yourCouncilDetails/<council>', views.yourCouncilDetails, name='yourCouncilDetails'),
     path('addRequest/', views.add_request),
-    path('studentReject_requests/', views.studentReject_requests, name='studentReject_requests')
+    path('studentReject_requests/', views.studentReject_requests, name='studentReject_requests'),
+    path('eventApprove', views.eventApprove, name='eventApprove'),
+    path('councilEventApprove', views.councilEventApprove, name='councilEventApprove')
+    
 ]
