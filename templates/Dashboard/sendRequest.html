@@ -7,6 +7,7 @@
 
 {% block content %}
 {% if role_name == 'Student' %}
+{% if g_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -24,7 +25,8 @@
         </div>
     </div>
 </div>
-
+{% endif %}
+{% if s_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -58,7 +60,9 @@
         </div>
     </div>
 </div>
+{% endif %}
 
+{% if c_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -92,10 +96,13 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endif %}
 
 {% if role_name == 'Staff' %}
+
+{% if p_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -113,7 +120,9 @@
         </div>
     </div>
 </div>
+{% endif %}
 
+{% if h_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -142,7 +151,9 @@
         </div>
     </div>
 </div>
+{% endif %}
 
+{% if f_status.accept_requests %}
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <div class="white-box">
@@ -176,6 +187,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endif %}
 

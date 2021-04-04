@@ -189,7 +189,9 @@ def event_registration(request, eventId):
 
 @login_required(login_url = '/')
 def adminDashboard(request):
-    return render(request, 'Dashboard/adminDashboard.html')
+    if request.method == 'GET':
+        user_data = get_user_data(request)
+        return render(request, 'Dashboard/adminDashboard.html',user_data)
 
 @login_required(login_url = '/')
 def roleRequest(request):
@@ -466,6 +468,13 @@ def add_request(request):
 @login_required(login_url = '/')
 def sendRequest(request):
     user_data = get_user_data(request)
+    p_status = UserRoles.objects.get(role = 'Principal')
+    h_status = UserRoles.objects.get(role = 'HOD') 
+    f_status = UserRoles.objects.get(role = 'Faculty Incharge')
+    g_status = UserRoles.objects.get(role = 'GS')
+    s_status = UserRoles.objects.get(role = 'Student Head')
+    c_status = UserRoles.objects.get(role = 'Council Member')
+    user_data.update({'p_status': p_status,'h_status': h_status,'f_status': f_status,'g_status': g_status,'s_status': s_status,'c_status': c_status})
     return render(request, 'Dashboard/sendRequest.html', user_data)
 
 @login_required(login_url = '/')
@@ -477,13 +486,10 @@ def yourCouncil(request):
 def yourCouncilDetails(request, council):
     user_data = get_user_data(request)
     councilObj = Council.objects.get(name= council)
-    print(councilObj)
     events = Event.objects.filter(council= councilObj)
     user_data.update({'events': events})
-    print(events)
     council_members = CouncilMember.objects.filter(council=councilObj)
     user_data.update({'councilMembers': council_members})
-    print(council_members.values_list)
     return render(request, 'Dashboard/yourCouncilDetails.html', user_data)
 
 
