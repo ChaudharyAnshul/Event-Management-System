@@ -12,7 +12,7 @@
 <div class="row justify-content-center">
     {% for council in councils %}
         <div class="col-lg-4 col-md-12">
-            <a href="{% url 'councilEventApprove' %}" class="a-tag">
+            <a href="{% url 'councilEventApprove' council.council.id %}" class="a-tag">
                 <div class="white-box analytics-info" style="border-radius: 7px;">
                     <h3 class="box-title center">{{ council.council }}</h3>
                 </div>

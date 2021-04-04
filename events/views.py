@@ -348,7 +348,7 @@ def viewEvents(request, council,eventId):
 def allEvents(request):
     if request.method == 'GET':
         user_data = get_user_data(request)
-        events = Event.objects.all()
+        events = Event.objects.filter(is_approved = True, is_active = True)
         user_data.update({'events':events})
         return render(request, 'Dashboard/allEvents.html', user_data)
 
@@ -437,6 +437,7 @@ def studentApproveRequest(request):
             user_data.update({'pending_requests':pending_requests})
             return render(request, 'Dashboard/studentApproveRequest.html', user_data)
 
+@login_required(login_url = '/')
 def add_request(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -462,14 +463,17 @@ def add_request(request):
     else:
         return redirect('/accounts/google/login')
 
+@login_required(login_url = '/')
 def sendRequest(request):
     user_data = get_user_data(request)
     return render(request, 'Dashboard/sendRequest.html', user_data)
 
+@login_required(login_url = '/')
 def yourCouncil(request):
     user_data = get_user_data(request)
     return render(request, 'Dashboard/yourCouncil.html', user_data)
 
+@login_required(login_url = '/')
 def yourCouncilDetails(request, council):
     user_data = get_user_data(request)
     councilObj = Council.objects.get(name= council)
@@ -483,12 +487,31 @@ def yourCouncilDetails(request, council):
     return render(request, 'Dashboard/yourCouncilDetails.html', user_data)
 
 
+@login_required(login_url = '/')
 def eventApprove(request):
     user_data = get_user_data(request)
     return render(request, 'Dashboard/eventApprove.html', user_data)
 
-def councilEventApprove(request):
+@login_required(login_url = '/')
+def councilEventApprove(request, councilId):
     user_data = get_user_data(request)
-    
+    events = Event.objects.filter(council = councilId, is_approved = False, is_rejected = False)
+    user_data.update({'events': events})
     return render(request, 'Dashboard/councilEventApprove.html', user_data)
 
+@login_required(login_url = '/')
+def approve_event(request, councilId):
+    if request.method == "POST":
+        user = authUser.objects.get(id = request.user.id)
+        Event.objects.filter(id = request.POST['eventId']).update(is_approved = True)
+        Event.objects.filter(id = request.POST['eventId']).update(is_active = True)
+        # Event.objects.filter(id = request.POST['eventId']).update(staff_approved = user)
+        return redirect("/councilEventApprove/"+councilId)
+
+@login_required(login_url = '/')
+def reject_event(request, councilId):
+    if request.method == "POST":
+        user = authUser.objects.get(id = request.user.id)
+        Event.objects.filter(id = request.POST['eventId']).update(is_rejected = True)
+        # Event.objects.filter(id = request.POST['eventId']).update(staff_approved = user)
+        return redirect("/councilEventApprove/"+councilId)

@@ -90,6 +90,7 @@ DATABASES = {
         'PASSWORD': password,
         'HOST': hostname,
         'PORT': '3306',
+        'STORAGE_ENGINE': 'MyISAM / INNODB / ETC',
     }
 }
 
@@ -159,3 +160,4 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+

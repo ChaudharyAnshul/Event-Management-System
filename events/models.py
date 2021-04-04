@@ -90,6 +90,7 @@ class Event(models.Model):
     registration_fee = models.IntegerField(default=0)
     payment_no = models.IntegerField(default=0)
     is_active = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
