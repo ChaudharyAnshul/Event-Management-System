@@ -167,7 +167,7 @@
                             </a>
                         </li>
                         {% endif %}
-                        {% if can_edit %}
+                        {% if can_edit or role.is_principal or role.is_hod %}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'manageEvents' %}"
                                 aria-expanded="false" style="text-decoration: none;">
