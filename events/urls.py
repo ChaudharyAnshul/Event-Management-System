@@ -47,5 +47,6 @@ urlpatterns = [
     path('councilEventApprove/<councilId>', views.councilEventApprove, name='councilEventApprove'),
     path('approve_event/<councilId>/approve', views.approve_event, name='approve_event'),
     path('reject_event/<councilId>/reject', views.reject_event, name='reject_event'),
-    
+    path('viewReport/<councilId>/<eventId>', views.viewReport, name='viewReport'),
+    path('submitReport/', views.submitReport, name="submitReport")
 ]

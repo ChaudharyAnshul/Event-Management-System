@@ -120,3 +120,7 @@ class RoleRequests(models.Model):
     request_time = models.DateTimeField(auto_now_add=True)
     approve_time = models.DateTimeField(null= True, default=None)
     is_approved = models.BooleanField(default=None, null=True)
+
+class Report(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    description = models.CharField(max_length=2000)
